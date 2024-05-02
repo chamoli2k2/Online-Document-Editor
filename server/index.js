@@ -5,9 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const PORT = 9000;
-
-const i0 = new Server(PORT, {
+const i0 = new Server(process.env.PORT, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
