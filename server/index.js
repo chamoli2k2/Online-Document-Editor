@@ -1,6 +1,8 @@
 import { Server } from "socket.io";
 import connectDB from "./database/db.js";
 import { getDocument, updateDocument } from "./controllers/documentController.js";
+import express from "express";
+import { createServer } from "http";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -8,11 +10,18 @@ dotenv.config();
 
 const port = process.env.PORT || 4000;
 
-const i0 = new Server(port, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-    },
+const app = express();
+
+app.use(express.static("client/build"));
+const httpServer = createServer(app);
+httpServer.listen(port);
+
+
+const i0 = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
 
 connectDB();
