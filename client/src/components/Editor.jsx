@@ -50,7 +50,7 @@ const Editor = () => {
   }, []);
 
   useEffect(() => {
-    const socketServer = io("https://online-document-editor-1.onrender.com/");
+    const socketServer = io("http://localhost:9000");
 
     setSocket(socketServer);
 
